@@ -14,9 +14,9 @@ macos-dev-setup
 │   └── scripts
 │       ├── ssh_setup.sh       # Script to generate SSH keys
 │       ├── dev_tools.sh       # Script to install development tools
-│       ├── python_setup.sh     # Script to install Python
+│       ├── python_setup.sh    # Script to install Python
 │       ├── java_setup.sh      # Script to install OpenJDK and Maven
-│       ├── docker_setup.sh     # Script to install Docker and Podman
+│       ├── docker_setup.sh    # Script to install Docker and Podman
 │       └── k8s_setup.sh       # Script to install Kubernetes tools
 ├── LICENSE                     # Licensing information
 └── README.md                   # Documentation for the project
@@ -40,7 +40,16 @@ macos-dev-setup
    ./src/setup.sh
    ```
 
-This will execute the various setup scripts in the correct order to configure your development environment.
+4. [optional] To ensure the `.zshrc` configuration is loaded every time you open a new terminal, copy the `.zshrc` file to your home directory:
+   ```bash
+   cp src/configs/.zshrc ~/.zshrc
+   ```
+   Or create a softlink
+   ```bash
+   ln -s $(pwd)/src/configs/.zshrc ~/.zshrc
+   ```
+
+This will execute the various setup scripts in the correct order to configure your development environment and apply the shell environment configurations.
 
 ## License
 
