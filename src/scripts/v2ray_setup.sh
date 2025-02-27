@@ -38,11 +38,11 @@ fi
 
 # Create V2Ray configuration directory if it doesn't exist
 log "Creating V2Ray configuration directory..."
-mkdir -p /usr/local/etc/v2ray || handle_error "creating V2Ray configuration directory"
+mkdir -p $(brew --repo)/etc/v2ray || handle_error "creating V2Ray configuration directory"
 
 # Copy the configuration file
 log "Copying V2Ray configuration file..."
-cp $(pwd)/src/configs/v2ray.config /usr/local/etc/v2ray/config.json || handle_error "copying V2Ray configuration file"
+cp $(pwd)/../configs/v2ray.config $(brew --repo)/etc/v2ray/config.json || handle_error "copying V2Ray configuration file"
 
 # Start V2Ray
 log "Starting V2Ray..."
