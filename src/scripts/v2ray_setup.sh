@@ -23,12 +23,13 @@ else
     log "Homebrew is already installed."
 fi
 
-# Update Homebrew
-log "Updating Homebrew..."
-brew update || handle_error "Homebrew update"
-
 # Check if V2Ray is already installed
 if ! command -v v2ray &> /dev/null; then
+    # Update Homebrew
+    log "Updating Homebrew..."
+    brew update || handle_error "Homebrew update"
+
+    # Install V2Ray
     log "V2Ray not found. Installing V2Ray..."
     brew install v2ray || handle_error "V2Ray installation"
 else
