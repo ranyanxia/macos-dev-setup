@@ -49,3 +49,6 @@ log "Starting V2Ray..."
 brew services start v2ray || handle_error "starting V2Ray"
 
 log "V2Ray installation and configuration completed successfully."
+log "Now socks5 proxy is running on
+  Host:127.0.0.1    Port:10808
+Enjoy the free world!"
