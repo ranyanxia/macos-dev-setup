@@ -1,5 +1,6 @@
 # Add Homebrew to PATH for Apple Silicon
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # function to set proxy
 fq() {
@@ -37,3 +38,28 @@ unset-sysfq() {
     sudo networksetup -setsocksfirewallproxystate Wi-Fi off
     echo "System proxy disabled."
 }
+
+# functions for ollama
+ollama-start() {
+    brew services start ollama
+}
+ollama-stop() {
+    brew services stop ollama
+}
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/ranyanxia/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# Alias to open Visual Studio Code
+alias vsc="open -a Visual\ Studio\ Code"
+alias d="docker"
+alias dc="docker-compose"
+alias ddesktop="open -a Docker\ Desktop"
+alias k="kubectl"
+alias h="helm"
+alias m="minikube"
+alias p="podman"
+alias torepo="cd ~/devs/gitrepos"
