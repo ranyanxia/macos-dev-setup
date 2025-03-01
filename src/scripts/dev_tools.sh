@@ -1,43 +1,94 @@
 #!/bin/bash
 
+# Function to log messages
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
+}
+
+# Function to handle errors
+handle_error() {
+    log "Error occurred during $1. Do you want to continue? (y/n)"
+    read -r response
+    if [[ "$response" != "y" ]]; then
+        log "Setup aborted."
+        exit 1
+    fi
+}
+
 # Update Homebrew
-echo "Updating Homebrew..."
-brew update
+log "Updating Homebrew..."
+brew update || handle_error "Homebrew update"
 
 # Install Git
-echo "Installing Git..."
-brew install git
+if ! command -v git &> /dev/null; then
+    log "Installing Git..."
+    brew install git || handle_error "Git installation"
+else
+    log "Git is already installed."
+fi
 
 # Install GitHub CLI
-echo "Installing GitHub CLI..."
-brew install gh
+if ! command -v gh &> /dev/null; then
+    log "Installing GitHub CLI..."
+    brew install gh || handle_error "GitHub CLI installation"
+else
+    log "GitHub CLI is already installed."
+fi
 
 # Install Node.js
-echo "Installing Node.js..."
-brew install node
+if ! command -v node &> /dev/null; then
+    log "Installing Node.js..."
+    brew install node || handle_error "Node.js installation"
+else
+    log "Node.js is already installed."
+fi
 
 # Install Yarn
-echo "Installing Yarn..."
-brew install yarn
+if ! command -v yarn &> /dev/null; then
+    log "Installing Yarn..."
+    brew install yarn || handle_error "Yarn installation"
+else
+    log "Yarn is already installed."
+fi
 
 # Install Chrome
-echo "Installing Chrome..."
-brew install --cask google-chrome
+if ! brew list --cask google-chrome &> /dev/null; then
+    log "Installing Chrome..."
+    brew install --cask google-chrome || handle_error "Chrome installation"
+else
+    log "Chrome is already installed."
+fi
 
 # Install Edge
-echo "Installing Edge..."
-brew install --cask microsoft-edge
+if ! brew list --cask microsoft-edge &> /dev/null; then
+    log "Installing Edge..."
+    brew install --cask microsoft-edge || handle_error "Edge installation"
+else
+    log "Edge is already installed."
+fi
 
-# Install v2ray
-echo "Installing v2ray..."
-brew install v2ray
+# Install V2Ray
+if ! command -v v2ray &> /dev/null; then
+    log "Installing V2Ray..."
+    brew install v2ray || handle_error "V2Ray installation"
+else
+    log "V2Ray is already installed."
+fi
 
 # Install Visual Studio Code
-echo "Installing Visual Studio Code..."
-brew install --cask visual-studio-code
+if ! brew list --cask visual-studio-code &> /dev/null; then
+    log "Installing Visual Studio Code..."
+    brew install --cask visual-studio-code || handle_error "Visual Studio Code installation"
+else
+    log "Visual Studio Code is already installed."
+fi
 
 # Install IntelliJ IDEA
-echo "Installing IntelliJ IDEA..."
-brew install --cask intellij-idea
+if ! brew list --cask intellij-idea &> /dev/null; then
+    log "Installing IntelliJ IDEA..."
+    brew install --cask intellij-idea || handle_error "IntelliJ IDEA installation"
+else
+    log "IntelliJ IDEA is already installed."
+fi
 
-echo "Development tools installation completed."
+log "Development tools installation completed."
