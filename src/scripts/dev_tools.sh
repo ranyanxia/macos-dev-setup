@@ -21,14 +21,6 @@ else
     log "GitHub CLI is already installed."
 fi
 
-# Install Node.js
-if ! command -v node &> /dev/null; then
-    log "Installing Node.js..."
-    brew install node || handle_error "Node.js installation"
-else
-    log "Node.js is already installed."
-fi
-
 # Install Yarn
 if ! command -v yarn &> /dev/null; then
     log "Installing Yarn..."
