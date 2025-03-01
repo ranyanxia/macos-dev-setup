@@ -1,27 +1,10 @@
 #!/bin/bash
 
-# Function to log messages
-log() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
-}
+# Source common functions
+source $(dirname "$0")/common.sh
 
-# Function to handle errors
-handle_error() {
-    log "Error occurred during $1. Do you want to continue? (y/n)"
-    read -r response
-    if [[ "$response" != "y" ]]; then
-        log "Setup aborted."
-        exit 1
-    fi
-}
-
-# Install Homebrew if not already installed
-if ! command -v brew &> /dev/null; then
-    log "Homebrew not found. Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || handle_error "Homebrew installation"
-else
-    log "Homebrew is already installed."
-fi
+# Ensure Homebrew is installed and updated
+ensure_homebrew
 
 # Check if V2Ray is already installed
 if ! command -v v2ray &> /dev/null; then

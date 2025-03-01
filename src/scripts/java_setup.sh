@@ -1,23 +1,25 @@
 #!/bin/bash
 
-# Install Homebrew if not already installed
-if ! command -v brew &> /dev/null; then
-    echo "Homebrew not found. Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-    echo "Homebrew is already installed."
-fi
+# Source common functions
+source $(dirname "$0")/common.sh
 
-# Update Homebrew
-echo "Updating Homebrew..."
-brew update
+# Ensure Homebrew is installed and updated
+ensure_homebrew
 
 # Install OpenJDK
-echo "Installing OpenJDK..."
-brew install openjdk
+if ! command -v java &> /dev/null; then
+    log "Installing OpenJDK..."
+    brew install openjdk || handle_error "OpenJDK installation"
+else
+    log "OpenJDK is already installed."
+fi
 
 # Install Maven
-echo "Installing Maven..."
-brew install maven
+if ! command -v mvn &> /dev/null; then
+    log "Installing Maven..."
+    brew install maven || handle_error "Maven installation"
+else
+    log "Maven is already installed."
+fi
 
-echo "OpenJDK and Maven installation completed."
+log "OpenJDK and Maven installation completed."

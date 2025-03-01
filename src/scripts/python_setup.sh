@@ -1,31 +1,45 @@
 #!/bin/bash
 
-# Update Homebrew
-echo "Updating Homebrew..."
-brew update
+# Source common functions
+source $(dirname "$0")/common.sh
+
+# Ensure Homebrew is installed and updated
+ensure_homebrew
 
 # Install Python
-echo "Installing Python..."
-brew install python
+if ! command -v python3 &> /dev/null; then
+    log "Installing Python..."
+    brew install python || handle_error "Python installation"
+else
+    log "Python is already installed."
+fi
 
 # Verify Python installation
-echo "Verifying Python installation..."
-python3 --version
+log "Verifying Python installation..."
+python3 --version || handle_error "Python verification"
 
 # Install pip (Python package manager)
-echo "Installing pip..."
-brew install pip
+if ! command -v pip3 &> /dev/null; then
+    log "Installing pip..."
+    brew install pip || handle_error "pip installation"
+else
+    log "pip is already installed."
+fi
 
 # Verify pip installation
-echo "Verifying pip installation..."
-pip3 --version
+log "Verifying pip installation..."
+pip3 --version || handle_error "pip verification"
 
 # Install virtualenv for Python environment management
-echo "Installing virtualenv..."
-pip3 install virtualenv
+if ! command -v virtualenv &> /dev/null; then
+    log "Installing virtualenv..."
+    pip3 install virtualenv || handle_error "virtualenv installation"
+else
+    log "virtualenv is already installed."
+fi
 
 # Verify virtualenv installation
-echo "Verifying virtualenv installation..."
-virtualenv --version
+log "Verifying virtualenv installation..."
+virtualenv --version || handle_error "virtualenv verification"
 
-echo "Python setup completed successfully."
+log "Python setup completed successfully."

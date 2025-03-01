@@ -1,23 +1,9 @@
 #!/bin/bash
 
-# Function to log messages
-log() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
-}
+source $(dirname "$0")/common.sh
 
-# Function to handle errors
-handle_error() {
-    log "Error occurred during $1. Do you want to continue? (y/n)"
-    read -r response
-    if [[ "$response" != "y" ]]; then
-        log "Setup aborted."
-        exit 1
-    fi
-}
-
-# Update Homebrew
-log "Updating Homebrew..."
-brew update || handle_error "Homebrew update"
+# Ensure Homebrew is installed and updated
+ensure_homebrew
 
 # Install Git
 if ! command -v git &> /dev/null; then

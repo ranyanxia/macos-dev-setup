@@ -1,19 +1,7 @@
 #!/bin/bash
 
-# Function to log messages
-log() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
-}
-
-# Function to handle errors
-handle_error() {
-    log "Error occurred during $1. Do you want to continue? (y/n)"
-    read -r response
-    if [[ "$response" != "y" ]]; then
-        log "Setup aborted."
-        exit 1
-    fi
-}
+# Source common functions
+source $(dirname "$0")/common.sh
 
 # function to configure Docker
 configure_docker() {
@@ -28,9 +16,8 @@ configure_docker() {
     log "Docker configured successfully."
 }
 
-# Update Homebrew
-log "Updating Homebrew..."
-brew update || handle_error "Homebrew update"
+# Ensure Homebrew is installed and updated
+ensure_homebrew
 
 # Install Docker
 if ! command -v docker &> /dev/null; then

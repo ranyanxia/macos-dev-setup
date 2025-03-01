@@ -17,7 +17,7 @@ add_to_hosts() {
 }
 
 # Check for Homebrew, install if we don't have it
-# if test ! $(which brew); then
+if test ! $(which brew); then
     echo "Installing Homebrew..."
 
     # Check if the URL is accessible
@@ -26,7 +26,7 @@ add_to_hosts() {
     fi
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# fi
+fi
 
 # Change Homebrew source to Chinese mirror
 echo "Changing Homebrew source to Chinese mirror..."
