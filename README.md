@@ -11,13 +11,18 @@ macos-dev-setup
 │   ├── configs
 │   │   ├── .zshrc             # Zsh shell environment configurations and aliases
 │   │   └── .gitconfig         # Git configuration settings
+│   │   └── docker-config.json # Docker configuration file
 │   └── scripts
+│       ├── common.sh          # Common functions used by other scripts
 │       ├── ssh_setup.sh       # Script to generate SSH keys
 │       ├── dev_tools.sh       # Script to install development tools
 │       ├── python_setup.sh    # Script to install Python
 │       ├── java_setup.sh      # Script to install OpenJDK and Maven
 │       ├── docker_setup.sh    # Script to install Docker and Podman
-│       └── k8s_setup.sh       # Script to install Kubernetes tools
+│       ├── k8s_setup.sh       # Script to install Kubernetes tools
+│       ├── v2ray_setup.sh     # Script to install and configure V2Ray
+│       ├── homebrew_setup.sh  # Script to install and configure Homebrew
+│       ├── llm_setup.sh       # Script to install and configure Ollama
 ├── LICENSE                     # Licensing information
 └── README.md                   # Documentation for the project
 ```
