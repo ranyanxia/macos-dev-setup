@@ -47,6 +47,24 @@ ollama-stop() {
     brew services stop ollama
 }
 
+# Function to show file count in real-time
+show_file_count() {
+    local dir=$1
+    local interval=$2
+
+    if [ -z "$dir" ] || [ -z "$interval" ]; then
+        echo "Usage: show_file_count <directory> <interval_in_seconds>"
+        return
+    fi
+
+    echo "Press Ctrl+C to quit."
+    while true; do
+        clear
+        echo "File count in $dir: $(ls -1 "$dir" | wc -l)"
+        sleep "$interval"
+    done
+}
+
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/ranyanxia/.docker/completions $fpath)
 autoload -Uz compinit
